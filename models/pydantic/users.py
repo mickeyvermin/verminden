@@ -13,3 +13,17 @@ class UpdateUserFamilyRelationsRequest(BaseModel):
     father_id: int | None
     mother_id: int | None
     children_ids: list[int] | None
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+
+class AuthenticatedUser(BaseModel):
+    user_id: str

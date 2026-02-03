@@ -1,11 +1,10 @@
 from sqlalchemy import select
-
 from sqlalchemy import or_
-from classes.genealogy_node import GenealogyNode
+from services.auth import get_bcrypt_context
+from utils.classes.genealogy_node import GenealogyNode
 from models.pydantic.users import CreateUserRequest, UpdateUserFamilyRelationsRequest
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from models.sql.lineage import Genealogy, User
+from models.sql.gather import Genealogy, User
 
 
 async def create_user_service(request: CreateUserRequest, db: AsyncSession):
@@ -19,7 +18,7 @@ async def create_user_service(request: CreateUserRequest, db: AsyncSession):
     new_user = User(
         email=request.email,
         display_name=request.display_name,
-        password=request.password,
+        hashed_password=get_bcrypt_context().hash(request.password),
     )
 
     db.add(new_user)

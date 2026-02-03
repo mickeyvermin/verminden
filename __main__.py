@@ -9,12 +9,8 @@ from init_db import create_db_tables
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Run at startup
-    print("Creating database tables...")
     await create_db_tables()
     yield
-    # Run on shutdown (optional)
-    print("Shutting down...")
-
 
 
 app = FastAPI(lifespan=lifespan)
@@ -29,10 +25,4 @@ app.add_middleware(
 )
 
 if __name__ == "__main__":
-    uvicorn.run(
-        "__main__:app",
-        host="localhost",
-        port=8080,
-        reload=True,
-        workers=1
-    )
+    uvicorn.run("__main__:app", host="localhost", port=8080, reload=True, workers=1)

@@ -9,7 +9,7 @@ class User(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     email: Mapped[str] = mapped_column(unique=True)
     display_name: Mapped[str]
-    password: Mapped[str]
+    hashed_password: Mapped[str]
 
     genealogy = relationship("Genealogy", back_populates="user", passive_deletes=True)
     groups = relationship(

@@ -1,8 +1,10 @@
+from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from models.pydantic.albums import AlbumListResponse, AlbumSingleResponse, CreateAlbumRequest
 from models.pydantic.commons import MessageResponse
 from services.albums import create_album_service, get_album_by_id_service, search_albums_by_name_service
+from services.auth import get_current_user
 from utils.db import get_db
 
 
@@ -12,6 +14,7 @@ router = APIRouter()
 @router.get("/{album_id}", response_model=AlbumSingleResponse)
 async def get_album_by_id_endpoint(
     album_id: int,
+    _: Annotated[dict, Depends(get_current_user)],
     db: AsyncSession = Depends(get_db),
 ):
     result = await get_album_by_id_service(album_id, db)

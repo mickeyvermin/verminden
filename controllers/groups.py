@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.services.groups import create_group_service
+from services.groups import create_group_service
 from models.pydantic.groups import CreateGroupRequest
 from models.pydantic.commons import MessageResponse
 from utils.db import get_db

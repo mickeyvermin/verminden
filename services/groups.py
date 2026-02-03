@@ -1,5 +1,5 @@
 from models.pydantic.groups import CreateGroupRequest
-from models.sql.lineage import Group, UserGroupAssociation
+from models.sql.gather import Group, UserGroupAssociation
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
