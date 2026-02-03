@@ -1,0 +1,6 @@
+/proj_images
+/.venv
+/.ruff_cache
+/.env
+/.vscode
+__pycache__
